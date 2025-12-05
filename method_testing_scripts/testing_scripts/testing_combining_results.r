@@ -1,0 +1,66 @@
+
+# Set parameters  
+replicate_number <- as.integer(args[1])
+Population_structure <- args[2]
+number_of_pop <- as.integer(args[3])
+generations <- as.integer(args[4])
+correlation <- ifelse(args[5] == "NA", "", paste0("_", args[5]))
+wdiff <- args[6]
+wvar <- args[7]
+experiment_name <- args[8]
+
+folder_name <- paste0("wdiff", wdiff, "_wvar", wvar)
+results_dir <- paste0("results/",experiment_name, "/")
+
+# Read individual results files
+lava_file <- paste0(results_dir, "lava_results_", folder_name, ".csv")
+qstfst_file <- paste0(results_dir, "qstfst_results_", folder_name, ".csv")
+driftsel_file <- paste0(results_dir, "driftsel_results_", folder_name, ".csv")
+
+# Check if all files exist
+if (!file.exists(lava_file) || !file.exists(qstfst_file) || !file.exists(driftsel_file)) {
+  cat("Warning: Not all result files exist for replicate", replicate_number, "folder", folder_name, "\n")
+  cat("LAVA file exists:", file.exists(lava_file), "\n")
+  cat("QSTFST file exists:", file.exists(qstfst_file), "\n")
+  cat("Driftsel file exists:", file.exists(driftsel_file), "\n")
+  quit(status = 1)
+}
+
+# Read results
+lava_results <- read.csv(lava_file)
+qstfst_results <- read.csv(qstfst_file)
+driftsel_results <- read.csv(driftsel_file)
+
+# Filter for current replicate
+lava_rep <- lava_results[lava_results$replicate_number == replicate_number, ]
+qstfst_rep <- qstfst_results[qstfst_results$replicate_number == replicate_number, ]
+driftsel_rep <- driftsel_results[driftsel_results$replicate_number == replicate_number, ]
+
+# Check if all methods have results for this replicate
+if (nrow(lava_rep) == 0 || nrow(qstfst_rep) == 0 || nrow(driftsel_rep) == 0) {
+  cat("Warning: Missing results for replicate", replicate_number, "in folder", folder_name, "\n")
+  quit(status = 1)
+}
+
+# Combine results
+combined_results <- data.frame(
+  replicate_number = replicate_number,
+  p_value_QSTFST = qstfst_rep$p_value_QSTFST,
+  p_value_LAVA = lava_rep$p_value_LAVA,
+  log_ratio_LAVA = lava_rep$log_ratio_LAVA,
+  S_value_Driftsel = driftsel_rep$S_value_Driftsel,
+  p_value_QSTFST_Neutral = qstfst_rep$p_value_QSTFST_Neutral,
+  p_value_LAVA_Neutral = lava_rep$p_value_LAVA_Neutral,
+  log_ratio_LAVA_Neutral = lava_rep$log_ratio_LAVA_Neutral,
+  S_value_Driftsel_Neutral = driftsel_rep$S_value_Driftsel_Neutral
+)
+
+# Save to final results file
+final_results_file <- paste0(results_dir, "ALLresults_", Population_structure, "_", number_of_pop, "pop_", folder_name, ".csv")
+
+write.table(
+  combined_results, file = final_results_file, append = TRUE, 
+  sep = ",", col.names = !file.exists(final_results_file), row.names = FALSE
+)
+
+cat("Combined results saved to:", final_results_file, "\n")

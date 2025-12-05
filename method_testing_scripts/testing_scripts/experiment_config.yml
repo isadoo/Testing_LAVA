@@ -1,0 +1,90 @@
+experiments:
+  quantinemo_IM_18pop:
+    description: "Method testing over Island Model with 18 populations"
+    population_structure: "IM"
+    number_of_populations: 18
+    generations: 1000
+    folder_combinations:
+      - "wdiff0_wvar10"
+      - "wdiff0_wvar22"
+      - "wdiff0_wvar50"
+      - "wdiff4p6_wvar10"
+      - "wdiff4p6_wvar22"
+      - "wdiff4p6_wvar50"
+      - "wdiff10_wvar10"
+      - "wdiff10_wvar22"
+      - "wdiff10_wvar50"
+      - "wdiffNA_wvarNA"
+
+
+  quantinemo_SS_18pop:
+    description: "Method testing over Quantinemo Stepping Stone model with 18 populations"
+    population_structure: "SS"
+    number_of_populations: 18
+    generations: 3000
+    folder_combinations:
+      - "wdiff0_wvar10"
+      - "wdiff0_wvar22"
+      - "wdiff0_wvar50"
+      - "wdiff4p6_wvar10_cline"
+      - "wdiff4p6_wvar10_sine"
+      - "wdiff4p6_wvar22_cline"
+      - "wdiff4p6_wvar22_sine"
+      - "wdiff4p6_wvar50_cline"
+      - "wdiff4p6_wvar50_sine"
+      - "wdiff10_wvar10_cline"
+      - "wdiff10_wvar10_sine"
+      - "wdiff10_wvar22_cline"
+      - "wdiff10_wvar22_sine"
+      - "wdiff10_wvar50_cline"
+      - "wdiff10_wvar50_sine"
+      - "wdiffNA_wvarNA"
+
+  quantinemo_IM_9pop_Fst02:
+    description: "Method testing over Quantinemo Island Model with 9 populations, Fst 0.2"
+    population_structure: "IM"
+    number_of_populations: 9
+    generations: 1000
+    folder_combinations:
+      - "wdiff0_wvar10"
+      - "wdiff0_wvar22"
+      - "wdiff0_wvar50"
+      - "wdiff4p6_wvar10"
+      - "wdiff4p6_wvar22"
+      - "wdiff4p6_wvar50"
+      - "wdiff10_wvar10"
+      - "wdiff10_wvar22"
+      - "wdiff10_wvar50"
+      - "wdiffNA_wvarNA"
+
+  quantinemo_IM_9pop_Fst005:
+    description: "Method testing over Quantinemo Island Model with 9 populations, Fst 0.05"
+    population_structure: "IM"
+    number_of_populations: 9
+    generations: 1000
+    folder_combinations:
+      - "wdiff10_wvar10"
+      - "wdiffNA_wvarNA"
+
+  quantinemo_hierarchical_18pop:
+    description: "Method testing over Quantinemo Hierarchical model with 18 populations"
+    population_structure: "hierarchical"
+    number_of_populations: 18
+    generations: 1350
+    folder_combinations:
+      - "wdiff0_wvar10"
+      - "wdiff0_wvar22"
+      - "wdiff0_wvar50"
+      - "wdiff4p6_wvar10_grouped"
+      - "wdiff4p6_wvar10_swapped"
+      - "wdiff4p6_wvar22_grouped"
+      - "wdiff4p6_wvar22_swapped"
+      - "wdiff4p6_wvar50_grouped"
+      - "wdiff4p6_wvar50_swapped"
+      - "wdiff10_wvar10_grouped"
+      - "wdiff10_wvar10_swapped"
+      - "wdiff10_wvar22_grouped"
+      - "wdiff10_wvar22_swapped"
+      - "wdiff10_wvar50_grouped"
+      - "wdiff10_wvar50_swapped"
+      - "wdiffNA_wvarNA"
